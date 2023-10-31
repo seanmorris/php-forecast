@@ -1,5 +1,19 @@
 {
-    "name": "php-wasm-dist",
+    "name": "php-forecast",
     "type": "module",
-    "version": "0.0.0"
-  }
+    "version": "0.0.0",
+    "scripts": {
+      "start": "npx http-server -bgp 8887",
+      "start-u": "npx http-server -p 8887",
+      "start-b": "npx http-server -bp 8887",
+      "start-g": "npx http-server -gp 8887",
+      "rebuild-php": "npx php-wasm build web mjs",
+      "purge-cdn": "find * -maxdepth 0 -type f | while read FILENAME; do echo $FILENAME; curl -X PURGE https://php-forecast.pages.dev//$FILENAME; done;"
+    },
+    "dependencies": {
+        "http-server": "^14.1.1"
+    },
+    "devDependencies": {
+        "php-wasm": "^0.0.0-esm-preview-45"
+    }
+}
