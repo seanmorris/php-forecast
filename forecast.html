@@ -1,0 +1,100 @@
+<html>
+<head>
+<script async type = "text/javascript" src = "/php-tags.mjs"></script>
+<!-- <script async type = "text/javascript" src = "https://cdn.jsdelivr.net/npm/php-wasm@0.0.0-esm-preview-26/php-tags.mjs"></script> -->
+<!-- <script async type = "text/javascript" src = "https://www.unpkg.com/php-wasm@0.0.0-esm-preview-26/php-tags.mjs"></script> -->
+<script id = "input" src = "https://api.weather.gov/gridpoints/TOP/40,74/forecast" type = "text/json"></script>
+<script async type = "text/javascript" src = "https://cdn.jsdelivr.net/npm/php-wasm@0.0.0-esm-preview-26/php-tags.mjs"></script>
+<script id = "input" src = "https://api.weather.gov/gridpoints/TOP/40,74/forecast" type = "text/json"></script>
+<script type = "text/php" data-stdin = "#input" data-stdout = "#output" data-stderr = "#error">
+<?php
+$data = json_decode(file_get_contents('php://stdin'));
+
+$renderItem = function($item) {
+    ?><div class = "forecast-day">
+        
+        <span class = "icon-row">
+            <span class = "icon">
+                <span>
+                <?php if($item->isDaytime): ?>
+                    <?php switch($item->shortForecast):
+                        case 'Sunny':
+                            ?>☀️<?php
+                            break;
+                        case 'Mostly Sunny':
+                            ?>🌤️<?php
+                            break;
+                        case 'Mostly Clear':
+                            ?>☀️☁️<?php
+                            break;
+                        case 'Clear':
+                            ?>☀️<?php
+                            break;
+                        case 'Partly Cloudy then Slight Chance Rain Showers':
+                            ?>☀️🌧️<?php
+                            break;
+                        case 'Rain Showers':
+                        case 'Chance Rain Showers':
+                            ?>🌧️<?php
+                            break;
+                    endswitch; ?>
+                <?php else: ?>
+                    <?php switch($item->shortForecast):
+                        case 'Mostly Clear':
+                            ?>🌕☁️<?php
+                            break;
+                        case 'Partly Cloudy then Slight Chance Rain Showers':
+                            ?>🌕🌧️<?php
+                            break;
+                        case 'Rain Showers':
+                        case 'Chance Rain Showers':
+                            ?>🌧️<?php
+                            break;
+                        case 'Partly Cloudy':
+                            ?>☁️🌕<?php
+                            break;
+                        case 'Clear':
+                            ?>🌕<?php
+                            break;
+                    endswitch; ?>
+                <?php endif; ?>
+                </span>
+            </span>
+            <span class = "col">
+                <b><?=$item->name; ?></b>
+                <?=$item->shortForecast; ?>        
+            </span>
+        </span>
+        
+        
+        <span class = "small"><?=$item->detailedForecast; ?></span>
+        
+        <span class = "temperature">
+            Temperature
+            <b><?=$item->temperature; ?>°<?=$item->temperatureUnit; ?></b>
+        </span>
+        
+
+        <span class = "temperature">
+            Dewpoint
+            <b><?=($item->dewpoint->value * (9/5)) + 32; ?>°<?=$item->temperatureUnit; ?></b>
+        </span>
+
+
+    </div>
+
+    <?php
+
+};
+
+foreach($data->properties->periods as $item)
+{
+    echo $renderItem($item);
+}
+</script>
+</head>
+<body>
+    <div id = "output"></div>
+    <div id = "error"></div>
+</body>
+</html>

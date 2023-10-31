@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <script async type = "text/javascript" src = "./php-tags.mjs"></script>
+        <!-- <script async type = "text/javascript" src = "https://cdn.jsdelivr.net/npm/php-wasm/php-tags.mjs"></script> -->
+        <!-- <script async type = "text/javascript" src = "https://www.unpkg.com/php-wasm@0.0.0-esm-preview-26/php-tags.mjs"></script> -->
+        
+        <!-- <script id = "input" src = "https://api.weather.gov/gridpoints/TOP/40,74/forecast" type = "text/json"></script> -->
+        <script type = "text/php" src = "/test.php" data-stdout = "#output" data-stderr = "#error"></script>
+        <style type = "text/css">
+            body {
+                background-color: #333;
+                color: white;
+            }
+
+            #output {
+                display:flex;
+                flex-direction: column;
+                margin: 1.5rem;
+                padding: 1.5rem;
+            }
+
+            #output div {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            #output div div {
+                display:flex;
+                flex-direction: column;
+                width: 18rem;
+                white-space: break-word;
+                background-color: #444;
+                line-height: 1.7em;
+                margin-bottom: 1.5rem;
+                margin-right: 1.5rem;
+                padding: 1.5rem;
+            }
+
+            .short-forecast {
+                font-size: 0.85rem;
+                min-height: 3em;
+            }
+
+            .col {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+            }
+
+            .small {
+                font-size: 0.85rem;
+                line-height: 1.5em;
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+                flex: 1;
+            }
+
+            .icon-row {
+                margin-bottom: 1rem;
+                display: flex;
+                flex-direction: row;
+                align-items: flex-start;
+                justify-content: space-between;
+                text-align: right;
+            }
+
+            .icon {                
+                font-size: 2.25rem;
+                white-space: nowrap;
+            }
+
+            .temperature{
+                text-align: right;
+            }
+        </style>
+    </head>
+    <body>
+        <div id = "output"></div>
+        <div id = "error"></div>
+    </body>
+</html>
