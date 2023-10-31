@@ -1,0 +1,15 @@
+VRZNO_DEV_PATH=~/projects/vrzno
+OPTIMIZE=z
+SYMBOLS=0
+# PRELOAD_ASSETS=~/scratch/php-wasm-dist/php-assets/
+# PHP_DIST_DIR=~/scratch/php-wasm-dist/js-assets/
+
+GZIP=1
+BROTLI=1
+
+WITH_LIBXML=0
+WITH_TIDY=0
+WITH_ICONV=0
+WITH_ICU=0
+WITH_SQLITE=0
+WITH_VRZNO=1
